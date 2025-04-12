@@ -4,7 +4,7 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 
-static readonly string authorization = Environment.GetEnvironmentVariable("X-Authorization");
+static readonly string authorization = Environment.GetEnvironmentVariable("X_Authorization");
 
 public static IActionResult Run(
     HttpRequest req,
