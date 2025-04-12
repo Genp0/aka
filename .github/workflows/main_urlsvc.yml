@@ -10,7 +10,8 @@ on:
   workflow_dispatch:
 
 env:
-  DOTNET_VERSION: "8.0.x" # set this to the dotnet version to use
+  # DOTNET_VERSION is not strictly needed here anymore but can be kept for reference
+  DOTNET_VERSION: "8.0.x"
 
 jobs:
   build-and-deploy:
@@ -23,10 +24,16 @@ jobs:
       - name: "Checkout GitHub Action"
         uses: actions/checkout@v4
 
+      # Setup .NET step might still be useful for ensuring the right SDK is present for publish
       - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: "Build and Publish Project"
+        shell: bash
+        run: |
+          dotnet publish "./aka.csproj" --configuration Release --output ./publish
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -41,4 +48,4 @@ jobs:
         with:
           app-name: "urlsvc"
           slot-name: "Production"
-          package: "." # Deploy the repository root
+          package: "./publish" # Deploy the publish output directory
