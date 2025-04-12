@@ -39,7 +39,7 @@ namespace Aka.Function
             }
 
             // Create or Update via POST/PUT requires authorization
-            if ((req.Method.Equals("POST", StringComparison.OrdinalIgnoreCase) || req.Method.Equals("PUT", StringComparison.OrdinalIgnoreCase))
+            if (req.Method.Equals("POST", StringComparison.OrdinalIgnoreCase) || req.Method.Equals("PUT", StringComparison.OrdinalIgnoreCase))
             {
                 if (req.Headers.TryGetValues("X-Authorization", out var values) &&
                     values.FirstOrDefault() == authorization)
