@@ -28,6 +28,9 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
+      - name: Clean Project
+        run: dotnet clean --configuration Release
+
       - name: Build .NET Project
         run: dotnet build --configuration Release --output ./publish
 
