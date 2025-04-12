@@ -10,7 +10,6 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: "aka" # set this to the path to your web app project, defaults to the repository root
   DOTNET_VERSION: "8.0.x" # set this to the dotnet version to use
 
 jobs:
@@ -42,4 +41,4 @@ jobs:
         with:
           app-name: "urlsvc"
           slot-name: "Production"
-          package: "${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}"
+          package: "." # Deploy the repository root
